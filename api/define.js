@@ -30,7 +30,7 @@ function formatResponse(definition) {
   const shortDef =
     def.length > maxLength ? def.substring(0, maxLength - 3) + "..." : def; // Shorten if necessary
 
-  return `Term: ${term} - Definition: ${shortDef}`;
+  return `${term}: ${shortDef}`;
 }
 
 export default async function handler(req, res) {
