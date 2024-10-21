@@ -25,7 +25,8 @@ function formatResponse(definition) {
   def = def
     .replace(/\[|\]/g, "") // Remove square brackets
     .replace(/\n/g, " ") // Replace line breaks with spaces
-    .replace(/\r/g, "") // Replace line breaks with spaces
+    .replace(/\r/g, "") // Remove returns with spaces
+    .replace(/\\/g, "") // Remove back slashes
     .trim(); // Remove leading/trailing spaces
 
   const msgLength = (MAX_LENGTH > 500) ? 500 : MAX_LENGTH;
