@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7e7e7;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>API Test: Urban Dictionary Definition</h1>
+        <input type="text" id="term" placeholder="Enter a term">
+        <button onclick="fetchDefinition()">Get Definition</button>
+        <button onclick="fetchRandom()">Get Random</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function fetchDefinition() {
+            const term = document.getElementById('term').value;
+            if (!term) {
+                alert('Please enter a term');
+                return;
+            }
+            await fetchFromAPI(term);
+        }
+
+        async function fetchRandom() {
+            await fetchFromAPI('random');
+        }
+
+        async function fetchFromAPI(term) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Loading...';
+
+            try {
+                const response = await fetch(`/api/define?term=${encodeURIComponent(term)}`);
+                const data = await response.text();
+                resultDiv.innerHTML = `${data}`;
+            } catch (error) {
+                resultDiv.innerHTML = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
