@@ -33,10 +33,10 @@ function formatResponse(definition) {
     .trim(); // Remove leading/trailing spaces
 
   const msgLength = (MAX_LENGTH > 500) ? 500 : MAX_LENGTH;
-  const shortDef =
-    def.length > msgLength ? def.substring(0, msgLength - 3) + "..." : def; // Shorten if necessary
+  const formatDef =
+    def.length + 4 > msgLength ? def.substring(0, msgLength - 7) + "..." : def; // Shorten if necessary
 
-  return `${term}: ${shortDef}`;
+  return `${formatDef}`;
 }
 
 export default async function handler(req, res) {
