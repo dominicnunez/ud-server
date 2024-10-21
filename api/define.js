@@ -1,44 +1,69 @@
 // api/define.js
+// Turn on/off debug messages
+const debug = true;
+
+function logDebug(message) {
+  if (debug) {
+    console.log(message);
+  }
+}
+
+const getErrorMessage = (error) => {
+  return `An error occurred while fetching the definition: ${error.message}. Try again later.`;
+};
+
+const NO_DEFINITION_MESSAGE = 'No definitions found for this word.';
+
+// Function to format the response for Twitch chat
+function formatResponse(definition) {
+  const maxLength = 255; // Character limit for Twitch chat
+  const term = definition.word; // The term
+  let def = definition.meaning; // The definition
+
+  // Remove brackets, parentheses, quotes, and replace line breaks with spaces
+  def = def
+    .replace(/\[|\]/g, "") // Remove square brackets
+    .replace(/\n/g, " ") // Replace line breaks with spaces
+    .replace(/\r/g, "") // Replace line breaks with spaces
+    .trim(); // Remove leading/trailing spaces
+
+  const shortDef =
+    def.length > maxLength ? def.substring(0, maxLength - 3) + "..." : def; // Shorten if necessary
+
+  return `Term: ${term} - Definition: ${shortDef}`;
+}
 
 export default async function handler(req, res) {
-    const { word } = req.query; // Get the word from the query parameters
-  
-    // If no word is provided, fetch a random definition
-    if (!word) {
-      try {
-        // Fetch a range of definitions (the Urban Dictionary API doesn't have a dedicated random endpoint)
-        const response = await fetch(`https://api.urbandictionary.com/v0/random`);
-        const data = await response.json();
-  
-        if (data.list && data.list.length > 0) {
-          // Select a random definition from the fetched results
-          const randomDefinition = data.list[Math.floor(Math.random() * data.list.length)];
-          return res.status(200).json(randomDefinition);
-        } else {
-          // Return a not found message if no definitions are available
-          return res.status(404).json({ error: "No definitions found." });
-        }
-      } catch (error) {
-        // Handle any fetch errors
-        return res.status(500).json({ error: "An error occurred while fetching the definition." });
-      }
+  const { term } = req.query;
+  const limit = 3;
+  logDebug({ "term": term });
+
+  try {
+    let url;
+    if (["random", "randomword", "random word"].includes(term)) {
+      url = `https://unofficialurbandictionaryapi.com/api/random`;
+    } else {
+      url = `https://unofficialurbandictionaryapi.com/api/search?term=${encodeURIComponent(term)}&strict=false&matchCase=false&limit=${limit}&page=1&multiPage=false`;
     }
-  
-    // If a word is provided, fetch its definition
-    try {
-      const response = await fetch(`https://api.urbandictionary.com/v0/define?term=${word}`);
-      const data = await response.json();
-  
-      if (data.list && data.list.length > 0) {
-        // Return the first definition if found
-        return res.status(200).json(data.list[0]);
-      } else {
-        // Return a not found message if no definitions are available
-        return res.status(404).json({ error: "Definition not found." });
-      }
-    } catch (error) {
-      // Handle any fetch errors
-      return res.status(500).json({ error: "An error occurred while fetching the definition." });
+
+    logDebug(`Fetching from URL: ${url}`);
+    const response = await fetch(url);
+    logDebug(`Response status: ${response.status}`);
+    const data = await response.json();
+    logDebug(`Received data: ${JSON.stringify(data)}`);
+
+    if (response.ok) {
+      const definition = data.data[0];
+      logDebug({ "fetched definition": definition });
+      const formattedResponse = formatResponse(definition);
+      return res.status(200).json(formattedResponse);
+    } else if (response.status === 404) {
+      logDebug({"status check": response.status === 404})
+      return res.status(200).send(NO_DEFINITION_MESSAGE);
     }
+  } catch (error) {
+    logDebug(`Error occurred: ${error}`);
+    const statusCode = error.status || 500;
+    return res.status(statusCode).json({ error: getErrorMessage(error) });
   }
-  
+}
