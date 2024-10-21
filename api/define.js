@@ -20,13 +20,16 @@ function formatResponse(definition) {
   
   const term = definition.word; // The term
   let def = definition.meaning; // The definition
+  logDebug({"def": def})
 
   // Remove brackets, parentheses, quotes, and replace line breaks with spaces
   def = def
     .replace(/\[|\]/g, "") // Remove square brackets
     .replace(/\n/g, " ") // Replace line breaks with spaces
     .replace(/\r/g, "") // Remove returns with spaces
-    .replace(/\\/g, "") // Remove back slashes
+    .replace(/"/g, "'")
+
+
     .trim(); // Remove leading/trailing spaces
 
   const msgLength = (MAX_LENGTH > 500) ? 500 : MAX_LENGTH;
