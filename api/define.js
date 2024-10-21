@@ -32,7 +32,7 @@ function formatResponse(definition) {
 
     .trim(); // Remove leading/trailing spaces
 
-  const msgLength = (MAX_LENGTH > 398) ? 398 : MAX_LENGTH;
+  const msgLength = (MAX_LENGTH > 399) ? 399 : MAX_LENGTH;
   const formatDef =
     term.length + def.length + 5 > msgLength ? def.substring(0, msgLength - 5 - term.length) + "..." : def; // Shorten if necessary
   const termDefinition = `${term}: ${formatDef}`;
