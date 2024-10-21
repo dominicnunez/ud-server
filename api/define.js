@@ -34,7 +34,7 @@ function formatResponse(definition) {
 
   const msgLength = (MAX_LENGTH > 397) ? 397 : MAX_LENGTH;
   const formatDef =
-    term.length + def.length + 5 > msgLength ? def.substring(0, msgLength - 5 - term.length) + "..." : def; // Shorten if necessary
+    term.length + def.length + 5 > msgLength ? def.substring(0, msgLength - 5 - term.length) + "...." : def; // Shorten if necessary
   const termDefinition = `${term}: ${formatDef}`;
   logDebug({"termDefinition length": termDefinition.length, "termDefinition": termDefinition})
   return termDefinition;
