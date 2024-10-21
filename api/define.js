@@ -1,11 +1,12 @@
 // api/define.js
-const debug = true; // Turn on/off debug messages
-const limit = 1; // number of terms to return
-const maxLength = 600; // Character limit for Twitch chat
+const DEBUG = true; // Turn on/off debug messages
+const LIMIT = 1; // number of terms to return
+const MAX_LENGTH = 600; // Character limit for Twitch chat
 const NO_DEFINITION_MESSAGE = 'No definitions found for this word.';
+const RANDOM_TRIGGERS = ["random", "randomword", "random+word"]
 
 function logDebug(message) {
-  if (debug) {
+  if (DEBUG) {
     console.log(message);
   }
 }
@@ -27,7 +28,7 @@ function formatResponse(definition) {
     .replace(/\r/g, "") // Replace line breaks with spaces
     .trim(); // Remove leading/trailing spaces
 
-  const msgLength = (maxLength > 500) ? 500 : maxLength;
+  const msgLength = (MAX_LENGTH > 500) ? 500 : MAX_LENGTH;
   const shortDef =
     def.length > msgLength ? def.substring(0, msgLength - 3) + "..." : def; // Shorten if necessary
 
@@ -40,10 +41,10 @@ export default async function handler(req, res) {
 
   try {
     let url;
-    if (["random", "randomword", "random word"].includes(term)) {
-      url = `https://unofficialurbandictionaryapi.com/api/random?limit=${limit}&page=1&multiPage=false&`;
+    if (RANDOM_TRIGGERS.includes(term)) {
+      url = `https://unofficialurbandictionaryapi.com/api/random?limit=${LIMIT}&page=1&multiPage=false&`;
     } else {
-      url = `https://unofficialurbandictionaryapi.com/api/search?term=${encodeURIComponent(term)}&strict=false&matchCase=false&limit=${limit}&page=1&multiPage=false`;
+      url = `https://unofficialurbandictionaryapi.com/api/search?term=${encodeURIComponent(term)}&strict=false&matchCase=false&limit=${LIMIT}&page=1&multiPage=false`;
     }
 
     logDebug(`Fetching from URL: ${url}`);
