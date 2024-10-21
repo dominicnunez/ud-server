@@ -31,12 +31,13 @@ function formatResponse(definition) {
 
 
     .trim(); // Remove leading/trailing spaces
-  logDebug({"length of term+def+4": term.length + def.length + 4})
+
   const msgLength = (MAX_LENGTH > 398) ? 398 : MAX_LENGTH;
   const formatDef =
-    term.length + def.length + 4 > msgLength ? def.substring(0, msgLength - 4 - term.length) + "..." : def; // Shorten if necessary
-  
-  return `${term}: ${formatDef}`;
+    term.length + def.length + 5 > msgLength ? def.substring(0, msgLength - 5 - term.length) + "..." : def; // Shorten if necessary
+  const termDefinition = `${term}: ${formatDef}`;
+  logDebug({"termDefinition length": termDefinition.length, "termDefinition": termDefinition})
+  return termDefinition;
 }
 
 export default async function handler(req, res) {
