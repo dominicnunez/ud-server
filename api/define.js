@@ -3,7 +3,7 @@ const DEBUG = true; // Turn on/off debug messages
 const LIMIT = 1; // number of terms to return
 const MAX_LENGTH = 600; // Character limit for Twitch chat
 const NO_DEFINITION_MESSAGE = 'No definitions found for this word.';
-const RANDOM_TRIGGERS = ["random", "randomword", "random+word"]
+const RANDOM_TRIGGERS = ["random", "randomword", "random+word", "rand", "randomize"]
 
 function logDebug(message) {
   if (DEBUG) {
