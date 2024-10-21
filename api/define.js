@@ -16,7 +16,7 @@ const NO_DEFINITION_MESSAGE = 'No definitions found for this word.';
 
 // Function to format the response for Twitch chat
 function formatResponse(definition) {
-  const maxLength = 255; // Character limit for Twitch chat
+  const maxLength = 500; // Character limit for Twitch chat
   const term = definition.word; // The term
   let def = definition.meaning; // The definition
 
