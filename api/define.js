@@ -41,7 +41,7 @@ export default async function handler(req, res) {
   try {
     let url;
     if (["random", "randomword", "random word"].includes(term)) {
-      url = `https://unofficialurbandictionaryapi.com/api/random`;
+      url = `https://unofficialurbandictionaryapi.com/api/random?strict=false&matchCase=false&limit=${limit}&page=1&multiPage=false&`;
     } else {
       url = `https://unofficialurbandictionaryapi.com/api/search?term=${encodeURIComponent(term)}&strict=false&matchCase=false&limit=${limit}&page=1&multiPage=false`;
     }
