@@ -1,7 +1,7 @@
 // api/define.js
 const DEBUG = true; // Turn on/off debug messages
 const LIMIT = 1; // number of terms to return
-const MAX_LENGTH = 600; // Character limit for Twitch chat
+const MAX_LENGTH = 395; // Character limit for Twitch chat, max 397 due to bot limitations
 const NO_DEFINITION_MESSAGE = 'No definitions found for this word.';
 const RANDOM_TRIGGERS = ["random", "randomword", "random+word", "rand", "randomize"]
 
@@ -34,7 +34,7 @@ function formatResponse(definition) {
 
   const msgLength = (MAX_LENGTH > 397) ? 397 : MAX_LENGTH;
   const formatDef =
-    term.length + def.length + 5 > msgLength ? def.substring(0, msgLength - 5 - term.length) + "...." : def; // Shorten if necessary
+    term.length + def.length + 4 > msgLength ? def.substring(0, msgLength - 4 - term.length) + "..." : def; // Shorten if necessary
   const termDefinition = `${term}: ${formatDef}`;
   logDebug({"termDefinition length": termDefinition.length, "termDefinition": termDefinition})
   return termDefinition;
