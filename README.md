@@ -31,25 +31,21 @@ The app formats the definitions for easier readability and compliance with Twitc
 ### 3. Error Handling
 If the definition cannot be fetched or the API request fails, an appropriate error message will be returned.
 
-## Installation
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-repo/urban-dictionary-api.git
-2. **Install Dependencies**: Ensure you have Node.js installed, then run:
-    ```bash
-    npm install
-3. **Deploy to Vercel**: You can easily deploy this API to Vercel:
-    ```bash
-    vercel
-4. **Environment Variables**: You may set custom environment variables in a .env file to configure the debug mode or API limits.
-
 ## Configuration
 Check `define.js` for additional detailed comments on these configuration options.
 - **`DEBUG`**: Set to `true` or `false` to control the level of logging. By default, it's set to `true`.
 - **`LIMIT`**: Defines the number of results to return (defaults to 1).
 - **`MAX_LENGTH`**: Limits the character count of the returned response.
 - **`NO_DEFINITION_MESSAGE`**: Custom message shown when no definition is found.
+
+## Deployment
+1. Create a [GitHub](https://www.github.com) account if you don't have one.
+2. Fork the repository.
+3. Login into [Vercel](https://vercel.com/login) with your GitHub account.
+4. Add new project.
+5. Import the repository and deploy.
+
+**Note**: This API may be setup on other platforms such as Render or Netlify, but some changes may be necessary.
 
 ## Usage
 
