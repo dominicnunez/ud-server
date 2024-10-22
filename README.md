@@ -31,6 +31,26 @@ The app formats the definitions for easier readability and compliance with Twitc
 ### 3. Error Handling
 If the definition cannot be fetched or the API request fails, an appropriate error message will be returned.
 
+## Installation
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-repo/urban-dictionary-api.git
+2. **Install Dependencies**: Ensure you have Node.js installed, then run:
+    ```bash
+    npm install
+3. **Deploy to Vercel**: You can easily deploy this API to Vercel:
+    ```bash
+    vercel
+4. **Environment Variables**: You may set custom environment variables in a .env file to configure the debug mode or API limits.
+
+## Configuration
+
+- **`DEBUG`**: Set to `true` or `false` to control the level of logging. By default, it's set to `true`.
+- **`LIMIT`**: Defines the number of results to return (defaults to 1).
+- **`MAX_LENGTH`**: Limits the character count of the returned response.
+- **`NO_DEFINITION_MESSAGE`**: Custom message shown when no definition is found.
+
 ## Usage
 
 ### Streamelements Chatbot
@@ -42,6 +62,12 @@ $(customapi yourURL/api/define?term=$(queryescape ${1:}))
 ```
  #### **NOTE: Replace `yourURL` with the actual URL of the deployed app.**
 4. Save command
+
+### Web App
+- You can also test the API locally using the included HTML file.
+- This file provides a simple interface to fetch definitions from the API by entering a term or fetching a random definition.
+- Once the app is deployed, navigate to the URL provided.
+- This webpage is provided as an example and for testing purposes.
 
 ### API Endpoints
 
@@ -62,27 +88,6 @@ If no definitions are found or an error occurs, the following message will be re
 No definitions found for this word.
 Or in case of an API error:
 An error occurred while fetching the definition: {error_message}. Try again later.
-
-
-## Configuration
-
-- **`DEBUG`**: Set to `true` or `false` to control the level of logging. By default, it's set to `true`.
-- **`LIMIT`**: Defines the number of results to return (defaults to 1).
-- **`MAX_LENGTH`**: Limits the character count of the returned response.
-- **`NO_DEFINITION_MESSAGE`**: Custom message shown when no definition is found.
-
-## Installation
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-repo/urban-dictionary-api.git
-2. **Install Dependencies**: Ensure you have Node.js installed, then run:
-    ```bash
-    npm install
-3. **Deploy to Vercel**: You can easily deploy this API to Vercel:
-    ```bash
-    vercel
-4. **Environment Variables**: You may set custom environment variables in a .env file to configure the debug mode or API limits.
 
 ## Debugging
 Logs include:
