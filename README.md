@@ -33,10 +33,18 @@ If the definition cannot be fetched or the API request fails, an appropriate err
 
 ## Configuration
 Check `define.js` for additional detailed comments on these configuration options.
-- **`DEBUG`**: Set to `true` or `false` to control the level of logging. By default, it's set to `true`.
-- **`LIMIT`**: Defines the number of results to return (defaults to 1).
-- **`MAX_LENGTH`**: Limits the character count of the returned response.
-- **`NO_DEFINITION_MESSAGE`**: Custom message shown when no definition is found.
+<>
+<li>DEBUG: Set to `true` or `false` to control the level of logging. By default, it's set to `true`.</li>
+    <ul><li>Default: true</li></ul>
+<li>LIMIT: Defines the number of results to return (defaults to 1).</li>
+    <ul><li>Default: 1</li></ul>
+<li>MAX_LENGTH: Limits the character count of the returned response.</li>
+    <ul><li>Default: 395</li></ul>
+<li>NO_DEFINITION_MESSAGE: Custom message shown when no definition is found.</li>
+    <ul><li>Default: No definitions found for this word.</li></ul>
+<li>RANDOM_TRIGGERS: Words or phrases that will trigger a random lookup.</li>
+    <ul><li>Default: ["random", "randomword", "random+word", "rand", "randomize"]</li></ul>
+</ul>
 
 ## Deployment
 1. Create a [GitHub](https://www.github.com) account if you don't have one.
