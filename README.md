@@ -64,7 +64,7 @@ $(customapi yourURL/api/define?term=$(queryescape ${1:}))
 4. Save command
 
 ### Web App
-- You can also test the API locally using the included HTML file.
+- You can also test the API using the included HTML file.
 - This file provides a simple interface to fetch definitions from the API by entering a term or fetching a random definition.
 - Once the app is deployed, navigate to the URL provided.
 - This webpage is provided as an example and for testing purposes.
