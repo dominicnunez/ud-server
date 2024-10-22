@@ -69,7 +69,6 @@ export default async function handler(req, res) {
     }
   } catch (error) {
     logDebug(`Error occurred: ${error}`);
-    const statusCode = error.status || 500;
-    return res.status(statusCode).json({ error: getErrorMessage(error) });
+    return res.status(200).json({ error: getErrorMessage(error) });
   }
 }
