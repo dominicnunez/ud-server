@@ -45,7 +45,7 @@ If the definition cannot be fetched or the API request fails, an appropriate err
 4. **Environment Variables**: You may set custom environment variables in a .env file to configure the debug mode or API limits.
 
 ## Configuration
-
+Check `define.js` for additional detailed comments on these configuration options.
 - **`DEBUG`**: Set to `true` or `false` to control the level of logging. By default, it's set to `true`.
 - **`LIMIT`**: Defines the number of results to return (defaults to 1).
 - **`MAX_LENGTH`**: Limits the character count of the returned response.
@@ -65,29 +65,29 @@ $(customapi yourURL/api/define?term=$(queryescape ${1:}))
 
 ### Web App
 - You can also test the API using the included HTML file.
-- This file provides a simple interface to fetch definitions from the API by entering a term or fetching a random definition.
+- This file provides a basic interface to fetch definitions from the API by entering a term or fetching a random definition.
 - Once the app is deployed, navigate to the URL provided.
 - This webpage is provided as an example and for testing purposes.
 
 ### API Endpoints
 
-- **Random Definition**
-/api/define?term=random
+- **Random Definition**:
+/api/define?term=random \
 This will return a random word definition.
 
-- **Search for a Term**
-/api/define?term=exampleTerm
+- **Search for a Term**:
+/api/define?term=exampleTerm \
 This will return the first definition for the specified term.
 
-### Example Response
+### Error Handling
+- If no definitions are found or an error occurs, the following message will be returned:
+```No definitions found for this word.```
+- Or in case of an API error:
+```An error occurred while fetching the definition: {error_message}. Try again later.```
+
+## Example Responses
 - **Non-max character limit**: "Dokes: Short for 'okey dokey' - meaning 'OK'."
 - **Max character limit**: "Denny's: Denny's is a 24-hour diner. They serve warm mediocre quality food, coffee, and the essential Meat-Lover's Skillet. To fully qualify as a Denny's however the diner must have: 1.) A waitress that has worked there way too long. She is missing a finger, a tooth, or maybe she has a 6th toe. In any case she's freaking tired and does not take any of your crap. 2.) One of the following ..."
-
-### Error Handling
-If no definitions are found or an error occurs, the following message will be returned:
-No definitions found for this word.
-Or in case of an API error:
-An error occurred while fetching the definition: {error_message}. Try again later.
 
 ## Debugging
 Logs include:
