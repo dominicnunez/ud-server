@@ -1,9 +1,14 @@
 // api/define.js
 const DEBUG = true; // Turn on/off debug messages
 const LIMIT = 1; // number of terms to return
-const MAX_LENGTH = 395; // Character limit for Twitch chat, max 397 due to bot limitations
+const MAX_LENGTH = 395; 
+/** Character limit for the formatted response. While twitch's max chat character limit is 500, 
+ * streamelements chatbot can only handle 397 when using customapi command.
+ * Exceeding a bots character limitations may produce incorrectly formatted messages when MAX_LENGTH exceeds that limit. **/
 const NO_DEFINITION_MESSAGE = 'No definitions found for this word.';
 const RANDOM_TRIGGERS = ["random", "randomword", "random+word", "rand", "randomize"]
+/* list of words that will trigger a random word/phrase to be returned. 
+* In phrases with spaces, the spaces should be replaced with the plus symbol (+). Example: "random+word" */
 
 function logDebug(message) {
   if (DEBUG) {
@@ -32,9 +37,9 @@ function formatResponse(definition) {
 
     .trim(); // Remove leading/trailing spaces
 
-  const msgLength = (MAX_LENGTH > 397) ? 397 : MAX_LENGTH;
+  // const msgLength = (MAX_LENGTH > BOT_MAX_LENGTH) ? BOT_MAX_LENGTH : MAX_LENGTH;
   const formatDef =
-    term.length + def.length + 4 > msgLength ? def.substring(0, msgLength - 4 - term.length) + "..." : def; // Shorten if necessary
+    term.length + def.length + 4 > MAX_LENGTH ? def.substring(0, MAX_LENGTH - 4 - term.length) + "..." : def; // Shorten if necessary
   const termDefinition = `${term}: ${formatDef}`;
   logDebug({"termDefinition length": termDefinition.length, "termDefinition": termDefinition})
   return termDefinition;
