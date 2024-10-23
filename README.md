@@ -31,7 +31,7 @@ The app will return a successfull query as `Term: Definition` that does not exce
 
 ### Error Handling
 - If no definitions are found or an error occurs, the following message will be returned:
-```No definitions found for this word.```
+```No definitions found for this query.```
 - Or in case of an API error:
 ```An error occurred while fetching the definition: {error_message}. Try again later.```
 
