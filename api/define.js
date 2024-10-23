@@ -9,7 +9,7 @@ const MAX_LENGTH = 395;
 /** Character limit for the formatted response. While twitch's max chat character limit is 500, 
  * streamelements chatbot can only handle 397 when using customapi command.
  * Exceeding a bots character limitations may produce incorrectly formatted messages when MAX_LENGTH exceeds that limit. **/
-const NO_DEFINITION_MESSAGE = 'No definitions found for this word.'; // Message when no definition is found
+const NO_DEFINITION_MESSAGE = 'No definitions found for this query.'; // Message when no definition is found
 const RANDOM_TRIGGERS = ["random", "randomword", "random+word", "rand", "randomize"]
 /* list of words that will trigger a random word/phrase to be returned. 
 * In phrases with spaces, the spaces should be replaced with the plus symbol (+). Example: "random+word" */
